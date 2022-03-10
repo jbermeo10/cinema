@@ -1,0 +1,8 @@
+// Acciones sincronas
+export const CAMBIAR_RUTA = 'CAMBIAR_RUTA';
+export const CAMBIAR_ESTA_LOGUEADO = 'CAMBIAR_ESTA_LOGUEADO';
+export const CAMBIAR_ES_ADMIN = 'CAMBIAR_ES_ADMIN';
+export const CAMBIAR_USUARIO = 'CAMBIAR_USUARIO';
+
+
+

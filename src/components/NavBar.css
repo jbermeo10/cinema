@@ -1,0 +1,8 @@
+
+.enlace:hover {
+  /* color:blue ; */
+  /* font-weight: bold; */
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}

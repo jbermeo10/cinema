@@ -1,0 +1,19 @@
+.inisesion {
+  background-color: rgba(214, 206, 135, 0.5);
+}
+
+.enlace:hover {
+  /* color:blue ; */
+  /* font-weight: bold; */
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.enlace-icono:hover {
+  /* color:blue ; */
+  /* font-weight: bold; */
+  /* text-decoration: underline; */
+  /* text-underline-offset: 3px; */
+  cursor: pointer;
+}

@@ -1,0 +1,9 @@
+.tarjeta {
+  width: 18em;
+  transition: all 0.1s; 
+}
+
+.tarjeta:hover {
+  transform: scale(1.1);
+  /* animation: pulse 1s infinite; */
+}

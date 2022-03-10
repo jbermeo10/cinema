@@ -2,21 +2,22 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { createLogger } from 'redux-logger';
-import { updateEstado } from './reducers';
+import ThunkMiddleware from 'redux-thunk';
+import { sincrono, asincrono } from './reducers';
 import reportWebVitals from './reportWebVitals';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 
 const registro = createLogger();
-// const almacenaje = createStore(updateEstado)
+const reducerRaiz = combineReducers({ sincrono, asincrono });
+
 const almacenaje = 
   createStore(
-    updateEstado, 
-    applyMiddleware(registro)
-  // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    reducerRaiz, 
+    applyMiddleware(ThunkMiddleware, registro)
   )
 
 //<React.StrictMode>

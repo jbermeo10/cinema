@@ -1,37 +1,40 @@
-import React, { useEffect, Suspense } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { checkTokenCall } from './components/ApiCalls.js'
-import { setearUsuario, setearEstaLogueado, setearEsAdmin } from './actions';
-
+import Register from './components/Register';
+import Signin from './components/Signin';
+import Perfil from './components/Perfil';
 import NavBar from './components/NavBar';
-import ErrorBoundary from './components/ErrorBoundary';
+import Salas from './components/Salas';
+import AdminPelis from './components/AdminPelis';
 import CarteleraSimple from './components/CarteleraSimple';
-const Register = React.lazy(() => import('./components/Register'))
-const Signin = React.lazy(() => import('./components/Signin'))
-const Perfil = React.lazy(() => import('./components/Perfil'))
-const Salas = React.lazy(() => import('./components/Salas'))
-const AdminPelis = React.lazy(() => import('./components/AdminPelis'))
-const CarteleraDetallada = React.lazy(() => import('./components/CarteleraDetallada'))
+import CarteleraDetallada from './components/CarteleraDetallada';
+import ErrorBoundary from './components/ErrorBoundary';
+import { setearEstaLogueado, setearEsAdmin, fecthUsuario } from './actions';
 
 const mapStateToProps = (estado) => {
-  return { ruta: estado.ruta }
+  return {
+    ruta: estado.sincrono.ruta,
+    usuario: estado.asincrono.usuario,
+    usuarioPendiente: estado.asincrono.usuario,
+    error: estado.asincrono.error,
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setUsuario: (obj) => dispatch(setearUsuario(obj)),
     setEstaLogueado: (booleano) => dispatch(setearEstaLogueado(booleano)),
     setEsAdmin: (booleano) => dispatch(setearEsAdmin(booleano)),
+    checkTokenCall: (setEsAdmin, setEstaLogueado) => dispatch(fecthUsuario(setEsAdmin, setEstaLogueado))
   }
 }
 
 function App(props) {
-  const { ruta, setUsuario, setEstaLogueado, setEsAdmin } = props;
+  const { ruta, setEstaLogueado, setEsAdmin } = props;
 
   useEffect(() => {
-    checkTokenCall(setUsuario, setEsAdmin, setEstaLogueado)
-  }, [setUsuario, setEsAdmin, setEstaLogueado]);
-  
+    checkTokenCall(setEsAdmin, setEstaLogueado)
+  }, []);
+
   const enrutamiento = () => {
     switch (ruta) {
       case "home":
@@ -56,9 +59,7 @@ function App(props) {
     <div className='App'>
       <NavBar />
       <ErrorBoundary>
-        <Suspense fallback={<h1 className="text-center mt-5">Cargando...</h1>}>
-          { enrutamiento() }
-        </Suspense>
+      { enrutamiento() }
       </ErrorBoundary>
     </div>
   );

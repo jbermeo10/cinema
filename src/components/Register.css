@@ -1,0 +1,17 @@
+.viewport {
+  background-image: url(../images/fondo-2.jpg);
+  background-size: cover;
+  height: 100vh;
+  /* display: flex;
+  justify-content: center; */
+  align-items: center;
+}
+
+.recuadro-login {
+  background: linear-gradient(to right, rgba(255, 255, 255) , rgb(123, 233, 230, 0.5));
+  border-radius: 1em;
+}
+
+.registro {
+  background-color: rgba(216, 206, 235, 0.5);
+}
