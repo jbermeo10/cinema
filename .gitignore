@@ -23,6 +23,6 @@ yarn-debug.log*
 yarn-error.log*
 
 # mis archivos
-useless
+/useless
 Mockup*
 Prueba*
