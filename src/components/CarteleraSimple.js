@@ -32,14 +32,14 @@ const CarteleraSimple = () => {
           <h1 className='titulo-cartelera'>PELICULAS EN CARTELERA</h1>
         </MDBCol>
 
-        {/* Aqui dibujo todas las peliculas de la base de datos en la vista cartelera simple
-        tener en cuenta que item es el objeto completo mientras que index es la posicion del objeto en el arreglo (un numero entero 0, 1, 2,...) 
-        peliculas.map((item, index)  => ... */}
+        {/* Aqui dibujo todas las peliculas de la base de datos en la vista cartelera simple.
+        Tener en cuenta que item es el objeto completo mientras que index es la posicion del objeto en el arreglo (un numero entero 0, 1, 2,...) 
+        Pase de "peliculas.map((item, index)" a "peliculas.map((item)" por consejo de Claude */}
         <MDBCol md="8" className='mx-auto mb-5 contenedor-peliculas'>
           {peliculas.map((item)  => {
               return ( 
                 <PeliculaSimple 
-                  /*key={index} // borrado y reemplazado con la linea de abajo por consejo de claude*/
+                  /*key={index} // borrado y reemplazado con la linea de abajo por consejo de Claude*/
                   key={item.id}
                   id={item.id}
                   titulo={item.titulo}

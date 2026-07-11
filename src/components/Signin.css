@@ -1,7 +1,9 @@
+/* al parecer este diseno no lo estoy usando, pero lo dejo por si acaso */
 .inisesion {
   background-color: rgba(214, 206, 135, 0.5);
 }
 
+/* Esto es para que el texto hoovereado se vea como un enlace y el puntero del mouse cambie a manito */
 .enlace:hover {
   /* color:blue ; */
   /* font-weight: bold; */
@@ -10,6 +12,7 @@
   cursor: pointer;
 }
 
+/* Esto es para que el puntero del mouse cambie a manito */
 .enlace-icono:hover {
   /* color:blue ; */
   /* font-weight: bold; */

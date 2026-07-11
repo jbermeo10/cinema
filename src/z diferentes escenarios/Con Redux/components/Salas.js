@@ -18,7 +18,7 @@ const Salas = () => {
   const [modal2, setModal2] = useState(false);
   const [modal3, setModal3] = useState(false);
   const [modal4, setModal4] = useState(false);
-  const [numeroSala, setNumeroSala] = useState('');
+  const [nombreSala, setNombreSala] = useState('');
 
   const editarSala = (event) => {
     console.log(salas)
@@ -29,7 +29,7 @@ const Salas = () => {
   const preborrado = (event) => {
     console.log(salas)
     setIndice(event.target.id)
-    setNumeroSala(salas[event.target.id].numero)
+    setNombreSala(salas[event.target.id].numero)
     setModal1(true)
   }
 
@@ -86,7 +86,7 @@ const Salas = () => {
         <ModalHeader close={<button className="close" onClick={() =>setModal1(false)}>X</button>} 
           toggle={() =>setModal1(false)}>Mensaje</ModalHeader>
         <ModalBody>
-          Está seguro que desea eliminar la sala <strong>{numeroSala}</strong> de la base de datos?
+          Está seguro que desea eliminar la sala <strong>{nombreSala}</strong> de la base de datos?
         </ModalBody>
         <ModalFooter>
           <Button color="primary" onClick={borrarSala}>Sí</Button>

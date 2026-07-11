@@ -196,6 +196,8 @@ export const actPerfilCall = (user, setModal, setModal2, setModal3,
   .catch(err => console.log(`Sin conexion al backend: ${err}`))
 }
 
+// Con esta funcion traigo la informacion de todas las salas de la base de datos para mostrarla en el frontend
+// Incluye id, numero, capacidad y tipo de sala
 export const salasCall = (setSalas) => {
   fetch(`http://${serverAddress}:3000/salas`, {
     method: 'get',
@@ -270,6 +272,7 @@ export const addSalaCall = (salas, setSalas, sala, setModal3, setModal,
   .catch(err => console.log(`Sin conexion al backend: ${err}`))
 }
 
+// Con esta funcion borro la sala de forma definitiva de la base de datos, y actualizo el arreglo de salas
 export const borrarSalaCall = (salas, setSalas, id, indice, setModal4) => {  
   fetch(`http://${serverAddress}:3000/salas/${id}`, {
     method: 'delete',
@@ -283,10 +286,16 @@ export const borrarSalaCall = (salas, setSalas, id, indice, setModal4) => {
   .then(salaResp => {
     if(salaResp.id) {
       console.log('Sala borrada exitosamente')
-      let salasCopy = [...salas];
-      salasCopy.splice(indice, 1)
-      console.log(salasCopy)
-      setSalas([...salasCopy])
+
+      // Estas lineas me las borro Claude
+      //let salasCopy = [...salas];
+      //salasCopy.splice(indice, 1)
+      //console.log(salasCopy)
+      //setSalas([...salasCopy])
+
+      // Y me dijo q lo que deberia ir es lo siguiente:
+      let salasCopy = salas.filter(sala => sala.id !== indice)
+      setSalas(salasCopy)
     } else {
       console.log("Error al borrar sala de la DB")
       setModal4(true);
