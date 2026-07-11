@@ -6,7 +6,6 @@ import { addPeliCall } from './ApiCalls.js'
 const PeliAdd = ({ pelis, setPelis, setModal3 }) => {
   const [peli, setPeli] = useState({
     titulo: '',
-    // imagen: '',
     descripcion: '',
     duracion: '',
     genero: '',
@@ -15,6 +14,7 @@ const PeliAdd = ({ pelis, setPelis, setModal3 }) => {
   const [modal, setModal] = useState(false);
   const [modal2, setModal2] = useState(false);
   const [modal4, setModal4] = useState(false);
+  const [modal5, setModal5] = useState(false);
   const [archivo, setArchivo] = useState(undefined);
 
   const cambioInput = (event) => {
@@ -23,7 +23,6 @@ const PeliAdd = ({ pelis, setPelis, setModal3 }) => {
         setPeli({...peli, titulo: event.target.value})
         break;
       case 'imagen':
-        // setPeli({...peli, imagen: event.target.files[0].name})
         setArchivo(event.target.files[0])
         break;
       case 'descripcion':
@@ -47,9 +46,14 @@ const PeliAdd = ({ pelis, setPelis, setModal3 }) => {
     if(peli.titulo === '') {
       console.log("Titulo en blanco");
       setModal4(true);
-    } else {
-      console.log("Agregar", peli);
-      addPeliCall(pelis, setPelis, peli, archivo, setModal3, setModal, setModal2);
+    } else if (archivo !== undefined) {
+      if(archivo.type!== "image/jpeg" && archivo.type!=="image/png") {
+        console.log("Formato de archivo incorrecto");  
+        setModal5(true);
+      } else {
+        console.log("Agregar", peli);
+        addPeliCall(pelis, setPelis, peli, archivo, setModal3, setModal, setModal2);
+      }
     }
   }
   return(
@@ -65,11 +69,11 @@ const PeliAdd = ({ pelis, setPelis, setModal3 }) => {
           <br/>
         <div className="input-group">
           <label htmlFor="formFile" className="my-auto mx-2">Imagen:</label>
-          <input name="imagen" type="file" className="form-control" id="formFile" accept="image/*" 
+          <input name="imagen" type="file" className="form-control" id="formFile" accept=".jpg,.jpeg,.png" 
             onChange={cambioInput}/>
           <div className="input-group-post mr-2">
             {/* <span className="input-group-text" id="inputGroupFileAddon01">(*.jpg)</span> */}
-            <span className="input-group-text">(*.jpg)</span>
+            <span className="input-group-text">(*.jpg, *.jpeg, *.png)</span>
           </div>
         </div>
           <br/>
@@ -138,6 +142,17 @@ const PeliAdd = ({ pelis, setPelis, setModal3 }) => {
       </ModalFooter>
       </Modal>
       
+      <Modal isOpen={modal5} toggle={() => setModal5(false)} centered>
+      <ModalHeader close={<button className="close" onClick={() => setModal5(false)}>X</button>}
+        toggle={() => setModal5(false)}>Mensaje</ModalHeader>
+      <ModalBody>
+        Por favor cargar un formato de archivo valido (*.jpg, *.jpeg, *.png)
+      </ModalBody>
+      <ModalFooter>
+        <Button color="primary" onClick={() => setModal5(false)}>Aceptar</Button>
+      </ModalFooter>
+      </Modal>
+
     </div>
   )
 }

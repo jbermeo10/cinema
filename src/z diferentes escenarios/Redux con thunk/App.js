@@ -37,7 +37,7 @@ function App(props) {
 
   const enrutamiento = () => {
     switch (ruta) {
-      case "home":
+      case "cartSimple":
         return <CarteleraSimple />
       case "salas":
         return <Salas />
@@ -47,7 +47,7 @@ function App(props) {
         return <Register  />
       case "signin":
         return <Signin />
-      case "peliculas":
+      case "cartDetallada":
         return <CarteleraDetallada />
       case "perfil":
         return <Perfil />

@@ -10,7 +10,7 @@ const estadoInicial = {
     email: '',
     joined: new Date()
   },
-  ruta: 'home',
+  ruta: 'cartSimple',
   estaLogueado: false,
   esAdmin: false,
 }

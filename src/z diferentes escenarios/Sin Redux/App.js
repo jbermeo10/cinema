@@ -27,7 +27,7 @@ const iniUsuario = {
 }
 
 function App() {
-  const [ruta, setRuta] = useState('home');
+  const [ruta, setRuta] = useState('cartSimple');
   const [usuario, setUsuario] = useState(iniUsuario);
   const [estaLogueado, setEstaLogueado] = useState(false);
   const [esAdmin, setEsAdmin] = useState(false);
@@ -38,7 +38,7 @@ function App() {
 
   const enrutamiento = () => {
     switch (ruta) {
-      case "home":
+      case "cartSimple":
         return <CarteleraSimple />
       case "salas":
         return <Salas />
@@ -50,7 +50,7 @@ function App() {
       case "signin":
         return <Signin 
         setRuta={setRuta} setEstaLogueado={setEstaLogueado} setUsuario={setUsuario} setEsAdmin={setEsAdmin} />
-      case "peliculas":
+      case "cartDetallada":
         return <CarteleraDetallada 
           estaLogueado={estaLogueado} usuario={usuario} setRuta={setRuta} />
       case "perfil":

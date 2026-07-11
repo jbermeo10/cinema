@@ -33,7 +33,7 @@ const { usuario, setUsuario, esAdmin, setRuta } = props;
   const [modal, setModal] = useState(false);
   const cerrarModal = () => {
     setModal(false);
-    setRuta('peliculas');
+    setRuta('cartDetallada');
   }
   const [modal1, setModal1] = useState(false);
   const cerrarModal1 = () => (setModal1(false))
@@ -125,7 +125,7 @@ const { usuario, setUsuario, esAdmin, setRuta } = props;
           </div> */}
           <div className="my-4 d-flex" style={{justifyContent:'space-evenly'}}>
             <Button type='submit' onClick={() => actualizarPerfil()} color="success">Guardar</Button>
-            <Button type='submit' onClick={() => setRuta('peliculas')} color="danger">Cancelar</Button>
+            <Button type='submit' onClick={() => setRuta('cartDetallada')} color="danger">Cancelar</Button>
           </div>
         </form> 
       </div>

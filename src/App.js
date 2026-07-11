@@ -46,7 +46,7 @@ function App(props) {
   // Aqui todas las 7 posibles pantallas de mi app, dependiendo de la variable de estado 'ruta'
   // Cada una de las 7 pantallas posibles tiene su propio archivo .js de desarrollo
     switch (ruta) {
-      case "home":
+      case "cartSimple":
         return <CarteleraSimple />
       case "salas":
         return <Salas />
@@ -56,7 +56,7 @@ function App(props) {
         return <Register  />
       case "signin":
         return <Signin />
-      case "peliculas":
+      case "cartDetallada":
         return <CarteleraDetallada />
       case "perfil":
         return <Perfil />

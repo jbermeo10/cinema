@@ -295,7 +295,8 @@ export const borrarSalaCall = (salas, setSalas, id, indice, setModal4) => {
   .catch(err => console.log(`Sin conexion al backend: ${err}`))
 }
 
-// con esta funcion traigo la informacion de las peliculas de la base de datos para mostrarla en el frontend
+// Con esta funcion traigo la informacion de todas las peliculas de la base de datos para mostrarla en el frontend
+// Incluye id, titulo, descripcion, duracion, genero y horas de funciones
 export const peliculasCall = (setPeliculas) => {
   fetch(`http://${serverAddress}:3000/peliculas`, {
     method: 'get',
@@ -304,7 +305,7 @@ export const peliculasCall = (setPeliculas) => {
   .then(response => response.json())
   .then(dbPeliculas => {
     if (dbPeliculas.length) {
-      // console.log(dbPeliculas);
+      // console.log(dbPeliculas); // Esto se uso al inicio para visualizar en consola lo que llegaba del backend
       setPeliculas(dbPeliculas);
     } else {
       console.log("Error al obtener peliculas de la DB");

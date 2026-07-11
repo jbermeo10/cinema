@@ -18,9 +18,9 @@ const NavBar = ({ setRuta, estaLogueado, usuario, esAdmin, setEstaLogueado, setE
               setEstaLogueado={setEstaLogueado} setEsAdmin={setEsAdmin} setUsuario={setUsuario}/>
           </Suspense>
           <p className="mx-3 my-1 text-white enlace" 
-            onClick={() => setRuta('home')}>Página Inicial</p>
+            onClick={() => setRuta('cartSimple')}>Página Inicial</p>
           <p className="mx-3 my-1 text-white enlace" 
-            onClick={() => setRuta('peliculas')}>Cartelera</p>
+            onClick={() => setRuta('cartDetallada')}>Cartelera</p>
         </MDBNavbarNav>
       </MDBNavbar>
     )
@@ -32,13 +32,13 @@ const NavBar = ({ setRuta, estaLogueado, usuario, esAdmin, setEstaLogueado, setE
         </MDBNavbarBrand>
         <MDBNavbarNav right>
           <p className="mx-3 my-1 text-white enlace" 
-            onClick={() => setRuta('home')}>Página Inicial</p>
+            onClick={() => setRuta('cartSimple')}>Página Inicial</p>
           <p className="mx-3 my-1 text-white enlace" 
             onClick={() => setRuta('signin')}>Iniciar Sesión</p>
           <p className="mx-3 my-1 text-white enlace" 
             onClick={() => setRuta('register')}>Registrarse</p>
           <p className="mx-3 my-1 text-white enlace" 
-            onClick={() => setRuta('peliculas')}>Cartelera</p>
+            onClick={() => setRuta('cartDetallada')}>Cartelera</p>
         </MDBNavbarNav>
       </MDBNavbar>
       )

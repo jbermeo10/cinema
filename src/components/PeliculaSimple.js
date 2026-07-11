@@ -13,7 +13,7 @@ const PeliculaSimple = ({ id, titulo }) => {
   // Si no la encuentra → usa defaultImg como imagen (una imagen generica que esta en el front)
     useEffect(() => retrieveImgCall(id, setImagenUrl, defaultImg), [id]);
 
-  // Aca dibujo la tarjeta de la pelicula utilizando el estilo 'tarjeta' de CSS y el titulo de la misma que es un parametro de entrada, asi como el URL de la imagen seteado antes
+  // Aca dibujo el card de la pelicula utilizando el estilo 'tarjeta' de CSS y el titulo de la misma que es un parametro de entrada, asi como el URL de la imagen seteado antes
   return (
       <MDBCard className='mx-5 my-5 tarjeta'>
         <MDBCardBody>

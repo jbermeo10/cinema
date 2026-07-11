@@ -6,7 +6,7 @@ import { CAMBIAR_RUTA, CAMBIAR_ESTA_LOGUEADO, CAMBIAR_ES_ADMIN,
 // *** SINCRONO ***
 
 const estadoInicialSincrono = {
-  ruta: 'home',
+  ruta: 'cartSimple',
   estaLogueado: false,
   esAdmin: false,
 }

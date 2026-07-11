@@ -32,9 +32,9 @@ const NavBar = (props) => {
             <DropDownUsuario />
           </Suspense>
           <p className="mx-3 my-1 text-white enlace" 
-            onClick={() => setRuta('home')}>Página Inicial</p>
+            onClick={() => setRuta('cartSimple')}>Página Inicial</p>
           <p className="mx-3 my-1 text-white enlace" 
-            onClick={() => setRuta('peliculas')}>Cartelera</p>
+            onClick={() => setRuta('cartDetallada')}>Cartelera</p>
         </MDBNavbarNav>
       </MDBNavbar>
     )
@@ -46,13 +46,13 @@ const NavBar = (props) => {
         </MDBNavbarBrand>
         <MDBNavbarNav right>
           <p className="mx-3 my-1 text-white enlace" 
-            onClick={() => setRuta('home')}>Página Inicial</p>
+            onClick={() => setRuta('cartSimple')}>Página Inicial</p>
           <p className="mx-3 my-1 text-white enlace" 
             onClick={() => setRuta('signin')}>Iniciar Sesión</p>
           <p className="mx-3 my-1 text-white enlace" 
             onClick={() => setRuta('register')}>Registrarse</p>
           <p className="mx-3 my-1 text-white enlace" 
-            onClick={() => setRuta('peliculas')}>Cartelera</p>
+            onClick={() => setRuta('cartDetallada')}>Cartelera</p>
         </MDBNavbarNav>
       </MDBNavbar>
       )

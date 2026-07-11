@@ -33,7 +33,7 @@ const Register = (props) => {
   const toggleModal = () => {
     setModal(false);
     setEstaLogueado(true);
-    setRuta('peliculas');
+    setRuta('cartDetallada');
   }
   const [modal1, setModal1] = useState(false);
   const cerrarModal1 = () => (setModal1(false));

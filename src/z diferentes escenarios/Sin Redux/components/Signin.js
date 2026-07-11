@@ -14,7 +14,7 @@ const Signin = ({ setRuta, setEstaLogueado, setUsuario, setEsAdmin }) => {
   const toggleModal = () => {
     setModal(false);
     setEstaLogueado(true);
-    setRuta('peliculas');
+    setRuta('cartDetallada');
   }
   const [modal1, setModal1] = useState(false);
   const toggleModal1 = () => (setModal1(!modal1))
