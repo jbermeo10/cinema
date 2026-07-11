@@ -42,7 +42,7 @@ function App() {
         return <CarteleraSimple />
       case "salas":
         return <Salas />
-      case "edit_pelis":
+      case "adminPelis":
         return <AdminPelis />
       case "register":
         return <Register

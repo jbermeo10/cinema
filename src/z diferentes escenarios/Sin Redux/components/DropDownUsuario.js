@@ -37,7 +37,7 @@ const DropDownUsuario = ({ setRuta, usuario, esAdmin, setEstaLogueado, setEsAdmi
         { esAdmin ?
         <div>
         <DropdownItem divider />
-        <DropdownItem onClick={() => setRuta('edit_pelis')}>Administrar películas</DropdownItem>
+        <DropdownItem onClick={() => setRuta('adminPelis')}>Administrar películas</DropdownItem>
         <DropdownItem onClick={() => setRuta('salas')}>Administrar salas</DropdownItem>
         </div>
         : <div></div> }
