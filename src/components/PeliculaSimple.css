@@ -1,9 +1,12 @@
+/* Este codigo es para dibujar la tarjeta de cada pelicula con el tamano indicado
+'all' significa que cualquier cambio de estilo en .tarjeta se va a animar suavemente durante 0.1 segundos en vez de cambiar de golpe.*/ 
 .tarjeta {
   width: 18em;
   transition: all 0.1s; 
 }
 
+/*animacion al colocar el mouse sobre la tarjeta*/
 .tarjeta:hover {
   transform: scale(1.1);
-  /* animation: pulse 1s infinite; */
+  /* animation: pulse 1s infinite; Esto era para hacer pulsaciones cada segundo, eliminado seguramente por tener efecto visual distractor */
 }

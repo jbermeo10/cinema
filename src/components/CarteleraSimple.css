@@ -1,8 +1,10 @@
 
+/* Aparentemente ya no estoy usando esto, es un degradado de color para el fondo de las peliculas de cartelera simple, algo similar ya se encuentra abajo en la linea 35 */
 .viewport-1 {
   background: linear-gradient(to right, rgb(255, 255, 255) , rgb(123, 233, 230));
 }
 
+/* Este codigo me lo traje de codepen.io para darle estilo a la palabra 'PELICULAS EN CARTELERA' */ 
 .titulo-cartelera {
   text-align: center;
   font-family: fantasy, Oswald, Helvetica, sans-serif;
@@ -24,6 +26,7 @@
   -30px 20px 40px dimgrey;
 }
 
+/* Este codigo es para dibujar los cuadrantes de cada pelicula de la cartelera simple */ 
 .contenedor-peliculas {
   /* border: 2px solid blue; */
   box-shadow: 4px 4px 5px #888888;

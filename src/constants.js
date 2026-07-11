@@ -1,3 +1,5 @@
+//Esto forma parte del esquema redux
+
 // Acciones sincronas
 export const CAMBIAR_RUTA = 'CAMBIAR_RUTA';
 export const CAMBIAR_ESTA_LOGUEADO = 'CAMBIAR_ESTA_LOGUEADO';

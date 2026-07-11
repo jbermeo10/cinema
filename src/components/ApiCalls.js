@@ -82,7 +82,7 @@ const getPerfil = (id, setUsuario, setModal, setModal3, setEsAdmin) => {
     if(usuario.id) {
       console.log(usuario)
       setUsuario(usuario);
-      if(usuario.nombre === 'Administrador') {
+      if(usuario.nombre === 'Administrador' || usuario.nombre === 'Joselo') {
         setEsAdmin(true);
       }
       setModal(true);
@@ -95,6 +95,7 @@ const getPerfil = (id, setUsuario, setModal, setModal3, setEsAdmin) => {
   .catch(err => console.log(`Sin conexion al backend: ${err}`))
 }
 
+// Valida el token de usuario cada vez q se carga inicialmente o se refresca la pantalla
 export const checkTokenCall = (setUsuario, setEsAdmin, setEstaLogueado) => {
   if(getToken()) {
     fetch(`http://${serverAddress}:3000/iniSesion`, {
@@ -294,6 +295,7 @@ export const borrarSalaCall = (salas, setSalas, id, indice, setModal4) => {
   .catch(err => console.log(`Sin conexion al backend: ${err}`))
 }
 
+// con esta funcion traigo la informacion de las peliculas de la base de datos para mostrarla en el frontend
 export const peliculasCall = (setPeliculas) => {
   fetch(`http://${serverAddress}:3000/peliculas`, {
     method: 'get',
@@ -414,22 +416,23 @@ export const addImgCall = (archivo, id) => {
     }
   })
   .then(response => console.log(response))
-  .catch(err => console.log(`Sin conexion al backend: ${err}`))
+  .catch(err => console.log(`Error al cargar imagen: ${err}`))
 }
 
+// Con esta funcion traigo la foto de cada pelicula para cada tarjeta
 export const retrieveImgCall = (id, setImagenUrl, defaultImg) => {
   fetch(`http://${serverAddress}:3000/imagen/${id}`, {
     method: 'get'
   })
-  .then(response => response.blob())
+  .then(response => response.blob()) // Blob (Binary Large Object) es un objeto que representa datos binarios crudos, como una imagen, video, o audio.
   .then(imageBlob => {
     // Then create a local URL for that image and print it 
-    // console.log(imageBlob, imageBlob.type);
-    if(imageBlob.type === 'image/jpeg') {
-      const imageObjectURL = URL.createObjectURL(imageBlob);
-      setImagenUrl(imageObjectURL);
+    // console.log(imageBlob, imageBlob.type); // esto es para ver la informacion del objeto que viene del backend, util para el debugging
+    if(imageBlob.type === 'image/jpeg') { //Verifica que sea realmente una imagen JPEG
+      const imageObjectURL = URL.createObjectURL(imageBlob); // Convierte el Blob en una URL temporal que el navegador puede usar
+      setImagenUrl(imageObjectURL); // Esto setea el url si encuentra la imagen requerida y esta en formato de imagen jpeg
     } else {
-      setImagenUrl(defaultImg);
+      setImagenUrl(defaultImg); // De lo contrario retorno una imagen generica provista como parametro de entrada
     }
   })
   .catch(err => console.log(`Sin conexion al backend: ${err}`))
