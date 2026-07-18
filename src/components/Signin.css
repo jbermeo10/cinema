@@ -20,3 +20,10 @@
   /* text-underline-offset: 3px; */
   cursor: pointer;
 }
+
+/* Esto es para reducir el alto de las filas de la tabla de salas, para que se vea mas compacta y ocupe menos espacio en la pantalla 
+Codigo sugerido por claude, no funciono... */
+.tabla-salas td, .tabla-salas th {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}

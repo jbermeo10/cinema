@@ -1,13 +1,14 @@
 import React, { useState, useEffect, Suspense } from 'react'; // Importo React por el uso de JSX, con react version 17 lo podria borrar, useEffect y useState son hooks de React 
 import { MDBCol, MDBIcon } from "mdbreact"; // forma parte de bootstrap para react, para hacer responsiva la visualizacion
 import { Table, Button, UncontrolledTooltip } from 'reactstrap'; // otra libreria de bootstrap para react, para presentar datos en una tabla, botones y tooltip para agregar sala
-import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'; // esto es para traer los pop-up
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'; // esto es para traer los pop-up o llamados tambien modales
 import { salasCall, borrarSalaCall } from './ApiCalls.js'; // con estas funciones traigo la informacion de las salas de la base de datos para mostrarla en el frontend, 
 // y tambien tengo una funcion para borrar salas de la base de datos
 import './Signin.css'; // de aca traigo codigo CSS de lo sgte: inisesion (no veo q se use), enlace, enlace-icono
 
-// import SalaEdit from './SalaEdit'; // Asi lo tenia al inicio, lo podria borrar
+// import SalaEdit from './SalaEdit'; // Asi lo tenia al inicio
 // import SalaAdd from './SalaAdd'; 
+
 // Las 2 posibles pantallas SalaEdit y SalaAdd (ambos son modales) se cargan solo si son llamadas para hacer mas rapida la carga de la pantalla Salas, se usa funcion react.lazy 
 const SalaEdit = React.lazy(() => import('./SalaEdit'))
 const SalaAdd = React.lazy(() => import('./SalaAdd'))
@@ -71,7 +72,7 @@ const Salas = () => {
         </div>
 
         {/* Tabla para mostrar las salas cargadas de la base de datos*/}
-        <Table bordered>
+        <Table bordered size="sm">
           {/* Estos son los titulos de las 4 columnas de la tabla */}
           <thead>
             <tr className="text-center bg-light">
@@ -94,7 +95,7 @@ const Salas = () => {
                   <td>{item.capacidad} personas</td>
                   <td>{item.tipo}</td>
                   <td>
-                    {/* Aqui se cargan los 2 enlaces para editar o confirmar borrado de la sala de esa linea*, href="!#" es para que luzca como enlace*/}
+                    {/* Aqui se cargan los 2 enlaces para editar o confirmar borrado de la sala de esa linea*, href="!#" es para que el texto 'Editar' y 'Borrar' luzca como enlace*/}
                     <div className="d-flex" style={{justifyContent:'space-evenly'}}>
                       {/* Aqui cambie 'id={index}' por 'id={item.id}'*/}
                       <a href="!#" className='blue-text enlace' onClick={editarSala} id={item.id}>Editar</a>
@@ -127,7 +128,7 @@ const Salas = () => {
         <ModalHeader close={<button className="close" onClick={() =>setModal2(false)}>X</button>} 
           toggle={() =>setModal2(false)}>Editar Sala</ModalHeader>
         <ModalBody>
-          {/* Aqui uso Suspense porque el componente SalaEdit es un componente React.lazy, importado de un archivo .js */}
+          {/* Aqui uso 'Suspense' porque el componente SalaEdit es un componente React.lazy, importado de un archivo .js */}
           <Suspense fallback={<h1 className="text-center mt-5">Cargando...</h1>}>
             <SalaEdit salas={salas} indice={indice} setSalas={setSalas} setModal2={setModal2}/>
           </Suspense>
@@ -139,7 +140,7 @@ const Salas = () => {
         <ModalHeader close={<button className="close" onClick={() =>setModal3(false)}>X</button>} 
           toggle={() =>setModal3(false)}>Agregar Sala</ModalHeader>
         <ModalBody>
-          {/* Aqui uso Suspense porque el componente SalaAdd es un componente React.lazy, importado de un archivo .js */}
+          {/* Aqui uso 'Suspense' porque el componente SalaAdd es un componente React.lazy, importado de un archivo .js */}
           <Suspense fallback={<h1 className="text-center mt-5">Cargando...</h1>}>
             <SalaAdd salas={salas} setSalas={setSalas} setModal3={setModal3}/>
           </Suspense>

@@ -2,7 +2,8 @@ const serverAddress = "localhost"; // para accederlo desde mi PC
 // const serverAddress = "192.168.100.143"; // si deseo que lo accedan en la LAN
 // const serverAddress = "ec2-3-142-91-255.us-east-2.compute.amazonaws.com"; // para accederlo desde internet
 
-const getToken = () => window.localStorage.getItem('token');
+const getToken = () => window.localStorage.getItem('token'); // funcion que valida el token del usuario actual, lee el token JWT que se guardo en el localStorage 
+// del navegador cuando el usuario hizo login.
 
 const guardarToken = (token) => {
   // window.sessionStorage.setItem('token', token);  // para un solo tab
@@ -214,59 +215,72 @@ export const salasCall = (setSalas) => {
   .catch(err => console.log(`Sin conexion al backend: ${err}`))
 }
 
-export const actSalaCall = (salas, indice, setSalas, sala, setModal2, 
-  setModal, setModal3) => {  
+// Funcion para editar una sala de la base de datos, y actualizar el arreglo de salas, que es una variable de estado local de la pantalla Salas.js
+// Modal1: Numero de sala ya existe, Modal2: Cierra el modal de editar sala, Modal3: Error al editar sala en la DB
+export const actSalaCall = (salas, indice, setSalas, sala, setModal2, setModal1, setModal3) => {  
   fetch(`http://${serverAddress}:3000/salas/${sala.id}`, {
     method: 'post',
-    // headers: {'Content-Type': 'application/json'}
+    // headers: {'Content-Type': 'application/json'} // No se porque comente esto y agregue lo de abajo ...
     headers: {
       'Content-Type': 'application/json',
-      'token': getToken()
+      'token': getToken() // No recuerdo para que era esta funcion getTToken...
+      // Segun claude, es una función que lee el JWT guardado en la cookie o localStorage y lo devuelve para mandarlo en el header.
+      // El backend recibe ese token, lo valida, y si es válido procesa la petición. Si no hay token o es inválido, rechaza la solicitud de editar sala.
     },
     body: JSON.stringify({ formulario: sala })
   })
   .then(response => response.json())
   .then(resp => {
     if(resp === "Actualizacion exitosa") {
-      setModal2(false);
-      console.log('Sala actualizada exitosamente')
+      console.log('Sala actualizada exitosamente') // Se debe borrar al final
+      
       let salasCopy = [...salas];
-      salasCopy[indice] = sala;
+      //salasCopy[indice] = sala;  // borrado por sugerencia de claude
+      
+      // Y me sugirio que vaya lo siguiente:
+      const posicion = salasCopy.findIndex(sala => sala.id === Number(indice))
+      salasCopy[posicion] = sala
       setSalas(salasCopy)
+
+      setModal2(false); // modal de cierre de 'Editar Sala' luego de operacion exitosa, lo tenia al inicio, esta bien si va al final??
     } else if (resp === "Sala ya existe") {
-      console.log('Sala ya existe')
-      setModal(true);
+      console.log('Sala ya existe') // Se debe borrar al final
+      setModal1(true); // Modal de advertencia de que el numero de sala ya existe en la base de datos
     } else {
-      console.log("Error al actualizar datos de sala en la DB")
-      setModal3(true);
+      console.log("Error al actualizar datos de sala en la DB") // Se debe borrar al final
+      setModal3(true); // Modal de error al editar sala en la DB
     }
   })
   .catch(err => console.log(`Sin conexion al backend: ${err}`))
 }
 
-export const addSalaCall = (salas, setSalas, sala, setModal3, setModal, 
-  setModal2) => {  
+// Funcion para agregar una nueva sala a la base de datos, y actualizar el arreglo de salas, que es una variable de estado local de la pantalla Salas.js
+// Modal1: Numero de sala ya existe, Modal2: Error al agregar sala a la DB, Modal3: Cierra el modal de agregar sala
+export const addSalaCall = (salas, setSalas, sala, setModal3, setModal1, setModal2) => {  
   fetch(`http://${serverAddress}:3000/salas`, {
     method: 'post',
-    // headers: {'Content-Type': 'application/json'}
+    // headers: {'Content-Type': 'application/json'} // No se porque comente esto y agregue lo de abajo ...
     headers: {
       'Content-Type': 'application/json',
-      'token': getToken()
+      'token': getToken() // No recuerdo para que era esta funcion getTToken...
+      // Segun claude, es una función que lee el JWT guardado en la cookie o localStorage y lo devuelve para mandarlo en el header.
+      // El backend recibe ese token, lo valida, y si es válido procesa la petición. Si no hay token o es inválido, rechaza la solicitud de agregar sala.
     },
     body: JSON.stringify({ formulario: sala })
   })
   .then(response => response.json())
   .then(salaResp => {
     if(salaResp.id) {
-      setModal3(false);
-      console.log('Sala agregada exitosamente')
-      setSalas([...salas, sala])
+      console.log('Sala agregada exitosamente') // Para validar que llegue a este punto, se debe borrar al final
+      // setSalas([...salas, sala]) // Borrrado y reemplazado por lo de abajo por consejo de Claude
+      setSalas([...salas, salaResp]) // Esto actualiza el arreglo de salas con la nueva sala agregada a la base de datos
+      setModal3(false); //  Con esto cierro el modal de 'Agregar Sala' luego de operacion exitosa, lo tenia al inicio, esta bien si va al final?? 
     } else if (salaResp === "Sala ya existe") {
-      console.log('Sala ya existe')
-      setModal(true);
+      console.log('Sala ya existe') // Se debe borrar al final
+      setModal1(true); // Modal de advertencia de que el numero de sala ya existe en la base de datos
     } else {
-      console.log("Error al actualizar datos de sala en la DB")
-      setModal2(true);
+      console.log("Error al actualizar datos de sala en la DB") // Se debe borrar al final
+      setModal2(true); // Modal de error al editar sala en la DB
     }
   })
   .catch(err => console.log(`Sin conexion al backend: ${err}`))
@@ -285,7 +299,7 @@ export const borrarSalaCall = (salas, setSalas, id, indice, setModal4) => {
   .then(response => response.json())
   .then(salaResp => {
     if(salaResp.id) {
-      console.log('Sala borrada exitosamente')
+      console.log('Sala borrada exitosamente') // Se debe borrar al final
 
       // Estas lineas me las borro Claude
       //let salasCopy = [...salas];
@@ -297,7 +311,7 @@ export const borrarSalaCall = (salas, setSalas, id, indice, setModal4) => {
       let salasCopy = salas.filter(sala => sala.id !== indice)
       setSalas(salasCopy)
     } else {
-      console.log("Error al borrar sala de la DB")
+      console.log("Error al borrar sala de la DB") // Se debe borrar al final
       setModal4(true);
     }
   })
@@ -314,7 +328,7 @@ export const peliculasCall = (setPeliculas) => {
   .then(response => response.json())
   .then(dbPeliculas => {
     if (dbPeliculas.length) {
-      // console.log(dbPeliculas); // Esto se uso al inicio para visualizar en consola lo que llegaba del backend
+      console.log(dbPeliculas); // Esto es para visualizar en consola lo que llega del backend, se debe borrar al final
       setPeliculas(dbPeliculas);
     } else {
       console.log("Error al obtener peliculas de la DB");
