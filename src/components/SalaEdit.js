@@ -19,6 +19,7 @@ const SalaEdit = ({ salas, indice, setSalas, setModal2 }) => {
   const [modal1, setModal1] = useState(false); // modal1 es para mostrar un mensaje de advertencia si el numero de sala ingresado ya existe en la base de datos
   const [modal3, setModal3] = useState(false); // modal3 es para mostrar un mensaje de error si no se pudo editar la sala en la base de datos
   const [modal4, setModal4] = useState(false); // este modal4 es para validar que el número de sala no venga en blanco
+  const [modal5, setModal5] = useState(false); // este modal5 es para validar que la capacidad de sala sea un numero entero entre 1 y 99999
 
   // Funcion para actualizar la variable de estado local 'sala' cuando el usuario escribe en los campos del formulario
   const cambioInput = (event) => {
@@ -29,7 +30,7 @@ const SalaEdit = ({ salas, indice, setSalas, setModal2 }) => {
         break;
       // Actualiza la capacidad de la sala, que puede ser un numero de hasta 5 digitos
       case 'capacidad':
-        setSala({...sala, capacidad: event.target.value})
+        setSala({...sala, capacidad: Number(event.target.value)})
         break;
       // Actualiza el tipo de sala, que puede ser un texto de hasta 20 caracteres
       case 'tipo':
@@ -47,6 +48,9 @@ const SalaEdit = ({ salas, indice, setSalas, setModal2 }) => {
     if(sala.numero.trim() === '' ) {
       console.log("El número de sala es requerido"); // Se debe borrar al final
       setModal4(true); // modal4 es para mostrar un mensaje de advertencia si el numero de sala ingresado viene en blanco
+    } else if (sala.capacidad === '' || sala.capacidad < 1 || sala.capacidad > 99999 ) {
+      console.log("Capacidad de sala invalida"); // Se debe borrar al final
+      setModal5(true);
     } else {
       console.log("Actualizar", sala); // Se debe borrar al final
       actSalaCall(salas, indice, setSalas, sala, setModal2, setModal1, setModal3);
@@ -74,7 +78,7 @@ const SalaEdit = ({ salas, indice, setSalas, setModal2 }) => {
         <div className='d-flex'>
         <label className="my-auto mx-2">Capacidad:</label>
         <input name="capacidad" className="form-control mr-2" placeholder="Capacidad" onChange={cambioInput}
-          type="number" maxLength="5" value={sala.capacidad}/>
+          type="number" min="1" maxLength="5" value={sala.capacidad}/>
         </div>
         <br/>
 
@@ -128,6 +132,18 @@ const SalaEdit = ({ salas, indice, setSalas, setModal2 }) => {
       </ModalBody>
       <ModalFooter>
         <Button color="primary" onClick={() => setModal4(false)}>Aceptar</Button>
+      </ModalFooter>
+      </Modal>
+
+ {/* Este modal5 valida que la capacidad de sala sea un número entero entre 1 y 99999 */}
+      <Modal isOpen={modal5} toggle={() => setModal5(false)} centered>
+      <ModalHeader close={<button className="close" onClick={() => setModal5(false)}>X</button>}
+        toggle={() => setModal5(false)}>Mensaje</ModalHeader>
+      <ModalBody>
+        Por favor ingrese una capacidad de sala válida.
+      </ModalBody>
+      <ModalFooter>
+        <Button color="primary" onClick={() => setModal5(false)}>Aceptar</Button>
       </ModalFooter>
       </Modal>
 

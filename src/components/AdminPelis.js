@@ -1,12 +1,15 @@
-import React, { useState, useEffect, Suspense } from 'react';
-import { MDBCol, MDBIcon } from "mdbreact";
-import { Table, Button, UncontrolledTooltip } from 'reactstrap';
-import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import { peliculasCall, borrarPeliCall } from './ApiCalls.js'
-import './Signin.css'
+import React, { useState, useEffect, Suspense } from 'react'; // Importo React por el uso de JSX, con react version 17 lo podria borrar, useEffect y useState son hooks de React 
+import { MDBCol, MDBIcon } from "mdbreact"; // forma parte de bootstrap para react, para hacer responsiva la visualizacion
+import { Table, Button, UncontrolledTooltip } from 'reactstrap'; // otra libreria de bootstrap para react, para presentar datos en una tabla, botones y tooltip para agregar sala
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'; // esto es para traer los pop-up o llamados tambien modales
+import { peliculasCall, borrarPeliCall } from './ApiCalls.js' // con estas funciones traigo la informacion de las peliculas de la base de datos para mostrarla en el frontend, 
+// y tambien tengo una funcion para borrar peliculas de la base de datos
+import './Signin.css'; // Esto no lo necesito, creo q lo podria borrar luego, mejor me espero a ver si me da algun error, de momento lo dejo
 
-// import PeliEdit from './PeliEdit';
+// import PeliEdit from './PeliEdit'; // Asi lo tenia al inicio
 // import PeliAdd from './PeliAdd';
+
+// Las 2 posibles pantallas PeliEdit y PeliAdd (ambos son modales) se cargan solo si son llamadas para hacer mas rapida la carga de la pantalla AdminPelis, se usa funcion react.lazy 
 const PeliEdit = React.lazy(() => import('./PeliEdit'))
 const PeliAdd = React.lazy(() => import('./PeliAdd'))
 
